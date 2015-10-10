@@ -4,6 +4,7 @@ const converter = require('./Converter');
 const helpers = require('./helpers/GraphHelpers');
 const _ = require('lodash');
 
+
 class Graph {
   //constructor(GraphSpecs) -> Graph
   constructor(specs){
@@ -11,6 +12,8 @@ class Graph {
     this.nodes = specs.nodes || {};
     this.edges = specs.edges || {};
     this.display = _.assign({ shrinkFactor: 1.3 }, specs.display);
+    this.display.title = specs.title || '';
+    this.display.description = specs.description || '';
   }
 
   isNull() {
@@ -101,10 +104,10 @@ class Graph {
       const xs = items.map(i => i.x);
       const ys = items.map(i => i.y);
       const textPadding = 50; // node text might extend below node
-      return { 
-        x: _.min(xs) - padding, 
-        y: _.min(ys) - padding, 
-        w: _.max(xs) - _.min(xs) + padding * 2, 
+      return {
+        x: _.min(xs) - padding,
+        y: _.min(ys) - padding,
+        w: _.max(xs) - _.min(xs) + padding * 2,
         h: _.max(ys) - _.min(ys) + textPadding + padding
       };
     } else {
@@ -122,53 +125,10 @@ class Graph {
   }
 
   static parseApiGraph(specs){
+    console.log('graph parse!!')
     return new Graph({})
-      ._importBase(specs)
-      .importEntities(specs.entities)
-      .importRels(specs.rels)
-      .importCaptions(specs.texts)
-      ._convertCurves();
-  }
-
-  _importBase(map) {
-    this.id = map.id;
-    this.display.title = map.title;
-    this.display.description = map.description;
-
-    return this;
-  }
-
-  importEntities(entities) {
-    entities.map(
-      e => this.addNode(converter.entityToNode(e))
-    );
-
-    return this;
-  }
-
-  importRels(rels) {
-    rels.map((r) => {
-      const specs = converter.relToEdgeSpecs(r);
-
-      this.connectNodes(
-        this.getNodeByEntityId(r.entity1_id).id,
-        this.getNodeByEntityId(r.entity2_id).id,
-        specs
-      );
-    });
-
-    return this;
-  }
-
-  importCaptions(captions) {
-    const that = this;
-    if (captions) {
-      captions.forEach(function(t) {
-        that.addCaption(t);
-      });
-    }
-
-    return this;
+      // ._importBase(specs)
+      // ._convertCurves();
   }
 
   _convertCurves() {

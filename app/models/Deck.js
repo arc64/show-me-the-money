@@ -1,5 +1,6 @@
 const Graph = require('./Graph');
 const _ = require('lodash');
+const lsConverter = require('../api/converters/lsConverter');
 
 class Deck {
 
@@ -29,6 +30,7 @@ class Deck {
 
   //parseApiDeck(apiDeck): [Deck,[Graph]]
   static parseApiDeck(apiDeck) {
+    console.log('deck parse deck')
     return [
       new Deck({
         id: apiDeck.id,
@@ -39,7 +41,7 @@ class Deck {
         date: apiDeck.date,
         source: { name: 'littlesis', url: 'http://littlesis.org' }
       }),
-      apiDeck.maps.map(Graph.parseApiGraph)
+      apiDeck.maps.map(lsConverter.parseApiGraph)
     ];
   }
 }
