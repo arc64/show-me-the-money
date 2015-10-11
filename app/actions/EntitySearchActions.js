@@ -1,6 +1,6 @@
 const Marty = require('marty');
 const sc = require('../constants/SearchConstants');
-const lsApi = require('../api/ls/api.js');
+const lsApi = require('../api/pop/api.js');
 
 class EntitySearchActions extends Marty.ActionCreators {
   search(query){
