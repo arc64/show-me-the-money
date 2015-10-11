@@ -1,8 +1,8 @@
 const Marty = require('marty');
 const GraphConstants = require('../constants/GraphConstants');
 const Graph = require('../models/Graph');
-const lsApi = require('../api/lsApi');
-const LsConverter = require('../api/converters/lsConverter');
+const lsApi = require('../api/ls/api');
+const LsConverter = require('../api/ls/Converter');
 
 class GraphQueries extends Marty.Queries {
   getGraph(id){

@@ -1,6 +1,6 @@
 const Marty = require('marty');
 const EntityConstants = require('../constants/EntityConstants');
-const lsApi = require('../api/lsApi');
+const lsApi = require('../api/ls/api');
 
 class EntityQueries extends Marty.Queries {
   getEntity(id){

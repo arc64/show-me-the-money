@@ -1,7 +1,7 @@
 const Marty = require('marty');
 const DeckConstants = require('../constants/DeckConstants');
 const Deck = require('../models/Deck');
-const lsApi = require('../api/lsApi');
+const lsApi = require('../api/ls/api');
 
 class DeckQueries extends Marty.Queries {
   fetchDeck(id){

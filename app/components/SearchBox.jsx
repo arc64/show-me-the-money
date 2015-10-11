@@ -1,7 +1,7 @@
 const BaseComponent = require('./BaseComponent');
 const Marty = require('marty');
 const { Combobox } = require('react-widgets');
-const lsApi = require('../api/lsApi');
+const lsApi = require('../api/ls/api');
 const converter = require('../models/Converter');
 //require('../../node_modules/react-widgets/lib/less/react-widgets.less');
 //TODO rip out SASS bootstrap and only use less for main css file
@@ -21,7 +21,7 @@ class SearchBox extends BaseComponent {
         placeholder='Search...'
         onChange={ query => this._submitSearch(query)}
         onSelect={ entity => this._handleSearchResultClick(entity)}
-        messages={{emptyList: 'No search results'}} 
+        messages={{emptyList: 'No search results'}}
       />
     );
   }

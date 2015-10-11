@@ -1,5 +1,5 @@
 //privates
-const config = require('../../config');
+const config = require('../../../config');
 const apiKey = config.lsApiKey;
 const baseUrlSymf = config.baseApiUrlSymf;
 const baseUrlRails = config.baseApiUrlRails;

@@ -1,7 +1,7 @@
 const Marty = require('marty');
 const GraphConstants = require('../constants/GraphConstants');
 const sc = require('../constants/SearchConstants');
-const lsApi = require('../api/lsApi');
+const lsApi = require('../api/ls/api');
 
 class GraphActions extends Marty.ActionCreators {
   showGraph(id){

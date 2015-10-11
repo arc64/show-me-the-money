@@ -3,7 +3,7 @@ var chaiAsPromised = require('chai-as-promised');
 var should = chai.should();
 var sd = require('../support/sampleData.js');
 var fakeApiDecks = require('../support/sampleData/fakeApiDecks');
-var lsApi = require('../../app/api/lsApi');
+var lsApi = require('../../app/api/ls/api');
 
 chai.use(chaiAsPromised);
 

@@ -1,6 +1,6 @@
 const Graph = require('./Graph');
 const _ = require('lodash');
-const lsConverter = require('../api/converters/lsConverter');
+const lsConverter = require('../api/ls/Converter');
 
 class Deck {
 
