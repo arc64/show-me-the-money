@@ -131,22 +131,6 @@ class Graph {
       // ._convertCurves();
   }
 
-  _convertCurves() {
-    _.values(this.edges).forEach(e => {
-      // convert control point from relative to absolute
-      if (e.display.cx != null && e.display.cy != null) {
-        let ax = (e.n1.display.x + e.n2.display.x) / 2;
-        let ay = (e.n1.display.y + e.n2.display.y) / 2;
-        e.display.cx += ax;
-        e.display.cy += ay;
-      }
-
-      e.updatePosition();
-      this.edges[e.id] = e;
-    });
-
-    return this;
-  }
 }
 
 module.exports = Graph;

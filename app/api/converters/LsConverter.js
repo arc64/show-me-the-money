@@ -3,30 +3,28 @@ const converter = require('../../models/Converter');
 const _ = require('lodash');
 
 
-class LsConverter {
+class LsGraph {
 
   constructor(graph) {
     this.graph = graph;
   }
 
   static parseApiGraph(specs){
-    //console.log(specs)
-    console.log('converter ls')
     var graph = new Graph(specs);
 
-    new LsConverter(graph)
+    // graph decorator
+    new LsGraph(graph)
       .importEntities(specs.entities)
-      //.importRels(specs.rels)
-      //.importCaptions(specs.texts)
-      //._convertCurves();
+      .importRels(specs.rels)
+      .importCaptions(specs.texts)
+      ._convertCurves();
 
     return graph;
   }
 
   importEntities(entities) {
-    console.log('import entities')
     entities.map(
-      e => graph.addNode(converter.entityToNode(e))
+      e => this.graph.addNode(converter.entityToNode(e))
     );
 
     return this;
@@ -35,10 +33,9 @@ class LsConverter {
   importRels(rels) {
     rels.map((r) => {
       const specs = converter.relToEdgeSpecs(r);
-
-      this.connectNodes(
-        this.getNodeByEntityId(r.entity1_id).id,
-        this.getNodeByEntityId(r.entity2_id).id,
+      this.graph.connectNodes(
+        this.graph.getNodeByEntityId(r.entity1_id).id,
+        this.graph.getNodeByEntityId(r.entity2_id).id,
         specs
       );
     });
@@ -58,7 +55,7 @@ class LsConverter {
   }
 
   _convertCurves() {
-    _.values(this.edges).forEach(e => {
+    _.values(this.graph.edges).forEach(e => {
       // convert control point from relative to absolute
       if (e.display.cx != null && e.display.cy != null) {
         let ax = (e.n1.display.x + e.n2.display.x) / 2;
@@ -68,11 +65,11 @@ class LsConverter {
       }
 
       e.updatePosition();
-      this.edges[e.id] = e;
+      this.graph.edges[e.id] = e;
     });
 
     return this;
   }
 }
 
-module.exports = LsConverter;
+module.exports = LsGraph;
